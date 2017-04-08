@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="coolswitch-1.0.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/46939dabf87fcca230de2c87ac1f156bf6041933/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/46939dabf87fcca230de2c87ac1f156bf6041933/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.serchinastico/coolswitch/1.0.1/892c229b0ab56dbead0904dc1d446e55675b715c/coolswitch-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,34 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="DefaultAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorBackground">@color/white</item>
+        <item name="textColor">@color/black</item>
+    </style>
+
+    <style name="NightModeAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_Night</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_Night</item>
+        <item name="colorAccent">@color/colorAccent_Night</item>
+        <item name="colorBackground">@color/colorPrimaryDark_Night</item>
+        <item name="textColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Base.TextAppearance.AppCompat.Date" />
+
+    <style name="Base.TextAppearance.AppCompat.Title.Note" />
+
+    <style name="Widget.ActionMode.customer" parent="Widget.AppCompat.ActionMode">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:height">?android:attr/actionBarSize</item>
+        <item name="android:actionModeBackground">@color/colorPrimary</item>
+    </style>
+</resources>

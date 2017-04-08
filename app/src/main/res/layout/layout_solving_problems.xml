@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/solving_problems_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorBackground"
+    tools:context="com.example.lilactests.SolvingProblemsActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/actionbar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tilte_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            app:mrl_rippleAlpha="0.15"
+            app:mrl_rippleColor="#ffffff"
+            app:mrl_rippleOverlay="true">
+
+            <Button
+                android:id="@+id/back_button"
+                android:layout_gravity="center"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_back" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <Chronometer
+            android:id="@+id/chronometer_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="18dp"
+            android:layout_marginRight="18dp"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/problem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="example"
+        android:textColor="?attr/textColor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actionbar" />
+
+    <net.soulwolf.widget.materialradio.MaterialRadioGroup
+        android:id="@+id/option_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/problem">
+
+        <net.soulwolf.widget.materialradio.MaterialRadioButton
+            android:id="@+id/material_radio_button_a"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            app:mcAnimator="true"
+            app:mcButton="@drawable/letter_radio_button"
+            app:mcTextColor="@drawable/radio_button_text_selector">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="A"
+                android:textColor="?attr/textColor"
+                android:textSize="24sp" />
+        </net.soulwolf.widget.materialradio.MaterialRadioButton>
+
+        <net.soulwolf.widget.materialradio.MaterialRadioButton
+            android:id="@+id/material_radio_button_b"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            app:mcAnimator="true"
+            app:mcButton="@drawable/letter_radio_button"
+            app:mcTextColor="@drawable/radio_button_text_selector">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="B"
+                android:textColor="?attr/textColor"
+                android:textSize="24sp" />
+        </net.soulwolf.widget.materialradio.MaterialRadioButton>
+
+        <net.soulwolf.widget.materialradio.MaterialRadioButton
+            android:id="@+id/material_radio_button_c"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            app:mcAnimator="true"
+            app:mcButton="@drawable/letter_radio_button"
+            app:mcTextColor="@drawable/radio_button_text_selector">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="C"
+                android:textColor="?attr/textColor"
+                android:textSize="24sp" />
+        </net.soulwolf.widget.materialradio.MaterialRadioButton>
+
+        <net.soulwolf.widget.materialradio.MaterialRadioButton
+            android:id="@+id/material_radio_button_d"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            app:mcAnimator="true"
+            app:mcButton="@drawable/letter_radio_button"
+            app:mcTextColor="@drawable/radio_button_text_selector">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="D"
+                android:textColor="?attr/textColor"
+                android:textSize="24sp" />
+        </net.soulwolf.widget.materialradio.MaterialRadioButton>
+
+    </net.soulwolf.widget.materialradio.MaterialRadioGroup>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/option_group"
+        app:layout_constraintLeft_toRightOf="@+id/option_group"
+        app:layout_constraintTop_toTopOf="@+id/option_group">
+
+        <TextView
+            android:id="@+id/textView_optionA"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="?attr/textColor" />
+
+        <TextView
+            android:id="@+id/textView_optionB"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="?attr/textColor" />
+
+        <TextView
+            android:id="@+id/textView_optionC"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="?attr/textColor" />
+
+        <TextView
+            android:id="@+id/textView_optionD"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="?attr/textColor" />
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

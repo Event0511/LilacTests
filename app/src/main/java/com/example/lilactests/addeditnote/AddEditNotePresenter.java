@@ -1,0 +1,75 @@
+package com.example.lilactests.addeditnote;
+
+import android.content.Context;
+
+import com.example.lilactests.model.INoteModel;
+import com.example.lilactests.model.NoteModel;
+import com.example.lilactests.model.domain.Note;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
+/**
+ * Created by wing on 2016/4/29.
+ */
+public class AddEditNotePresenter implements AddEditNoteContract.Presenter {
+    private INoteModel mNoteModel;
+    private AddEditNoteContract.View mAddEditNoteView;
+    private Subscriber<Boolean> mEditNoteSubscriber = new Subscriber<Boolean>() {
+        @Override
+        public void onNext(Boolean result) {
+            if (result) {
+                mAddEditNoteView.showSuccessRemind();
+            } else {
+                mAddEditNoteView.showFailureRemind();
+            }
+        }
+
+        @Override
+        public void onCompleted() {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+        }
+    };
+
+    public AddEditNotePresenter(Context context, AddEditNoteContract.View iNoteView) {
+        this.mNoteModel = new NoteModel(context);
+        this.mAddEditNoteView = iNoteView;
+    }
+
+
+    @Override
+    public void saveNote(final Note note) {
+        Observable.create(new Observable.OnSubscribe<Boolean>() {
+            @Override
+            public void call(Subscriber<? super Boolean> subscriber) {
+                boolean result = mNoteModel.addNote(note);
+                subscriber.onNext(result);
+                subscriber.onCompleted();
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mEditNoteSubscriber);
+    }
+
+
+    @Override
+    public void updateNote(final Note note) {
+        Observable.create(new Observable.OnSubscribe<Boolean>() {
+            @Override
+            public void call(Subscriber<? super Boolean> subscriber) {
+                boolean result = mNoteModel.updateNote(note);
+                subscriber.onNext(result);
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mEditNoteSubscriber);
+    }
+}

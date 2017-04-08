@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorPrimary_Night">#808080</color>
+    <color name="colorPrimaryDark_Night">#666666</color>
+    <color name="colorAccent_Night">#FF4081</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="steel_blue1">#63B8FF</color>
+
+    <!--以下来自wing-->
+    <color name="dark_divider">#84848484</color>
+    <color name="green_cycle">#4CAF50</color>
+    <color name="orange_cycle">#FF5722</color>
+    <color name="red_cycle">#FF4081</color>
+
+    <color name="white_light">#FFFFFFFF</color>
+    <color name="black_transparent">#44121212</color>
+</resources>

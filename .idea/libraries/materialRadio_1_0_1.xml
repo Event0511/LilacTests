@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="materialRadio-1.0.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/3f47c1cf4dbd8d28b8db155c0138053d3ae8bfdf/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/3f47c1cf4dbd8d28b8db155c0138053d3ae8bfdf/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.soulwolf.widget/materialRadio/1.0.1/78d9029f0b880bf2272158b40b5782faade98260/materialRadio-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

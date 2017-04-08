@@ -1,0 +1,20 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--typical margin of views-->
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="date_left_margin">20dp</dimen>
+
+    <!-- typical sizes of views -->
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="note_item_height">80dp</dimen>
+    <dimen name="title_size">20sp</dimen>
+    <dimen name="cardview_select_elevation">10dp</dimen>
+    <dimen name="icon_size">100dp</dimen>
+    <dimen name="corner_size">50dp</dimen>
+    <dimen name="space_large">50dp</dimen>
+    <dimen name="space_middle">20dp</dimen>
+</resources>

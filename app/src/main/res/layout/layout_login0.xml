@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <ImageView
+        android:id="@+id/splash_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background_lilac"
+        android:scaleType="centerCrop"/>
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<ImageView-->
+            <!--android:id="@+id/pixiv_img"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:src="@drawable/silentnight_pixiv36592097"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--/>-->
+
+        <LinearLayout
+            android:id="@+id/accountbar"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:id="@+id/account_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/account_image"
+                />
+
+            <EditText
+                android:id="@+id/account_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="账户/学号"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/passwordbar"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/accountbar">
+
+            <ImageView
+                android:id="@+id/password_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/password_image"
+                />
+
+            <EditText
+                android:id="@+id/password_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="密码"
+                android:inputType="textPassword"
+                />
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/login_radioGroup"
+            android:contentDescription="loginMode"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/passwordbar"
+            android:layout_marginTop="5dp">
+
+            <RadioButton
+                android:text="学生登录"
+                android:checked="true"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/userlogin_radioButton"
+                />
+
+            <RadioButton
+                android:text="管理员/教师登录"
+                android:checked="false"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/adimnlogin_radioButton"
+                />
+        </RadioGroup>
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="登录"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/login_radioGroup"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:text="没有账号？点此注册！"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/registerText"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/text_logo"
+            android:id="@+id/textLogo"
+            android:layout_above="@+id/accountbar"
+            />
+
+    </RelativeLayout>
+</FrameLayout>

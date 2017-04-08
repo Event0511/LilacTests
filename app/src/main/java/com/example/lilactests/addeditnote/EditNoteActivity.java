@@ -1,0 +1,122 @@
+package com.example.lilactests.addeditnote;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+
+import com.example.lilactests.BaseActivity;
+import com.example.lilactests.R;
+import com.example.lilactests.model.domain.Note;
+import com.example.lilactests.utils.TimeUtils;
+import com.example.lilactests.utils.ToastUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+/**
+ * EditNoteActivity ,contain EditNoteFragment and Toolbar.
+ */
+public class EditNoteActivity extends BaseActivity implements AddEditNoteContract.View {
+
+    public static final int UPDATE_SUCCESS = 1;
+    public static final int UPDATE_FAILED = 0;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.fab_update)
+    FloatingActionButton mUpdateFab;
+    private EditNoteFragment mNoteFragment;
+    private Note mNoteItem;
+    private Note note;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_note);
+        ButterKnife.bind(this);
+        initData();
+        initView();
+    }
+
+    private void initData() {
+        mNoteItem = (Note) getIntent().getSerializableExtra("note");
+        mNoteFragment = (EditNoteFragment)
+                getFragmentManager().findFragmentByTag(getString(R.string.edit_notes_fragment));
+
+    }
+
+    private void initView() {
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        restoreOriginData();
+        boolean hasAlarm = mNoteItem.hasAlarm;
+        if (hasAlarm) {
+            restoreAlarmData();
+        }
+    }
+
+    private void restoreAlarmData() {
+        mNoteFragment.setPicked(true);
+        mNoteFragment.setAlarmChecked(true);
+        mNoteFragment.setDateText(TimeUtils.formatDate(mNoteItem.date));
+        mNoteFragment.setTimeText(TimeUtils.formatTime(mNoteItem.date));
+    }
+
+    private void restoreOriginData() {
+        mNoteFragment.setTitleText(mNoteItem.title);
+        mNoteFragment.setContentText(mNoteItem.content);
+        mNoteFragment.setItemID(mNoteItem.id);
+    }
+
+    private void updateNote() {
+        if (mNoteFragment.confirmNoteComplete()) {
+            note = mNoteFragment.getNote(false, mNoteItem.id);
+            new AddEditNotePresenter(this, this).updateNote(note);
+        }
+    }
+
+    @Override
+    public void showSuccessRemind() {
+        ToastUtils.showToast(this, "update success");
+        Intent data = new Intent();
+        data.putExtra("edit", note);
+        setResult(UPDATE_SUCCESS, data);
+        finish();
+    }
+
+    @Override
+    public void showFailureRemind() {
+        ToastUtils.showToast(this, "update failed");
+        setResult(UPDATE_FAILED);
+        finish();
+    }
+
+    @OnClick(R.id.fab_update)
+    public void onClick() {
+        updateNote();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showProcess() {
+
+    }
+
+    @Override
+    public void dismissProcess() {
+
+    }
+}
