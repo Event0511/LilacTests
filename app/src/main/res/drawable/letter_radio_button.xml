@@ -4,23 +4,23 @@
         android:state_enabled="true"
         android:state_checked="true"
         android:state_pressed="true"
-        android:drawable="@drawable/radio_on_pressed" />
+        android:drawable="@drawable/radio_button_on_pressed" />
 
     <item
         android:state_enabled="true"
         android:state_checked="false"
         android:state_pressed="true"
-        android:drawable="@drawable/radio_off_pressed" />
+        android:drawable="@drawable/radio_button_off_pressed" />
 
     <item
         android:state_enabled="true"
         android:state_checked="true"
-        android:drawable="@drawable/radio_on" />
+        android:drawable="@drawable/radio_button_on_unpressed" />
 
     <item
         android:state_enabled="true"
         android:state_checked="false"
-        android:drawable="@drawable/radio_off" />
+        android:drawable="@drawable/radio_button_off_unpressed" />
 
     <item
         android:state_enabled="false"

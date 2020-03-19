@@ -3,8 +3,8 @@ package com.example.lilactests.notes;
 import android.content.Context;
 import android.os.SystemClock;
 
-import com.example.lilactests.model.INoteModel;
-import com.example.lilactests.model.NoteModel;
+import com.example.lilactests.model.Note.INoteModel;
+import com.example.lilactests.model.Note.NoteModel;
 import com.example.lilactests.model.domain.Note;
 
 import java.util.List;
@@ -85,12 +85,13 @@ public class NotesPresenter implements NotesContract.Presenter {
 
     @Override
     public void deleteNote(final Long id) {
-        Observable.create(new Observable.OnSubscribe<Void>() {
+        mNoteModel.deleteNote(id);
+        /*Observable.create(new Observable.OnSubscribe<Void>() {
             @Override
             public void call(Subscriber<? super Void> subscriber) {
                 mNoteModel.deleteNote(id);
             }
-        }).subscribeOn(Schedulers.io());
+        }).subscribeOn(Schedulers.io());*/
     }
 
     private List<Note> getNotes() {

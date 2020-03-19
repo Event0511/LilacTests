@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.lilactests.R;
+import com.example.lilactests.SettingsActivity;
 import com.example.lilactests.app.LilacTestsApp;
 import com.example.lilactests.utils.PrefUtils;
 
@@ -18,7 +19,6 @@ import com.example.lilactests.utils.PrefUtils;
  *  Created by Eventory on 2017/2/8 0008.
  */
 public class SettingFragment extends PreferenceFragment {
-    private OnTransition mOnTransition;
     private Context mContext;
 
     @Override
@@ -32,7 +32,6 @@ public class SettingFragment extends PreferenceFragment {
     @Override
     public void onAttach(Context context) {
         mContext = context;
-        mOnTransition = (OnTransition) context;
         super.onAttach(context);
     }
 
@@ -78,7 +77,8 @@ public class SettingFragment extends PreferenceFragment {
                         } else {
                             LilacTestsApp.setAppTheme(R.style.DefaultAppTheme);
                         }
-                        mOnTransition.beginTransition();
+                        // 调用上下文Activity的转换主题方法
+                        ((SettingsActivity) mContext).beginTransition();
                         return true;
                     }
                 });
@@ -87,8 +87,5 @@ public class SettingFragment extends PreferenceFragment {
         }
     }
 
-    public interface OnTransition {
-        void beginTransition();
-    }
 
 }

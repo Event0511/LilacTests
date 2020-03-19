@@ -1,36 +1,25 @@
 package com.example.lilactests.view.layoutfragment;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.ActionMode;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.example.lilactests.R;
 import com.example.lilactests.addeditnote.AddNoteActivity;
 import com.example.lilactests.addeditnote.EditNoteActivity;
-import com.example.lilactests.app.LilacTestsApp;
 import com.example.lilactests.config.DividerItemDecoration;
 import com.example.lilactests.config.MultiSelector;
 import com.example.lilactests.model.domain.Note;
-import com.example.lilactests.notes.INotesShowView;
-import com.example.lilactests.notes.MainActivity;
 import com.example.lilactests.notes.NotesContract;
 import com.example.lilactests.notes.NotesPresenter;
 import com.example.lilactests.notes.adapter.ChoiceCountEvent;
@@ -38,14 +27,11 @@ import com.example.lilactests.notes.adapter.ChoiceModeEvent;
 import com.example.lilactests.notes.adapter.EnterActivityEvent;
 import com.example.lilactests.notes.adapter.NotesAdapter;
 import com.example.lilactests.utils.RxBus;
-import com.example.lilactests.utils.ToastUtils;
-import com.example.lilactests.view.dialogfragment.AboutFragment;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import rx.Subscription;
 import rx.functions.Action1;
 
@@ -57,10 +43,9 @@ public class NotesPageFragment extends Fragment implements NotesContract.View,
         SwipeRefreshLayout.OnRefreshListener {
     private static final String ARG_POSITION = "position";
     private static int nowPosition;
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "NotesPageFragment";
     public static final int ADD_NOTE_EVENT = 0;
     public static final int EDIT_NOTE_EVENT = 1;
-    private static final String ABOUT_FRAGMENT = "ABOUT_FRAGMENT";
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     private RecyclerView mNotesViews;
@@ -95,13 +80,20 @@ public class NotesPageFragment extends Fragment implements NotesContract.View,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         nowPosition = getArguments().getInt(ARG_POSITION);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.activity_main, container, false);
+        mView = inflater.inflate(R.layout.page_notes, container, false);
+        mAddNoteButton = (FloatingActionButton) mView.findViewById(R.id.fab);
+        mAddNoteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent enterNewActivity = new Intent(getActivity(), AddNoteActivity.class);
+                startActivityForResult(enterNewActivity, ADD_NOTE_EVENT);
+            }
+        });
         ButterKnife.bind(mView);
         init();
 
@@ -109,30 +101,21 @@ public class NotesPageFragment extends Fragment implements NotesContract.View,
     }
 
     private void init() {
-        Log.w("Running Stage:","init-start");
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager
                 (getActivity(), LinearLayoutManager.VERTICAL, false);
         mNotesViews = (RecyclerView) mView.findViewById(R.id.content_recylerview);
         mRefreshLayout = (SwipeRefreshLayout) mView.findViewById(R.id.refreshlayout);
 
-        Log.w("Running Stage:","init1");
         mNotesPresenter = new NotesPresenter(getActivity(), this);
-        Log.w("Running Stage:","init2");
         mNotesPresenter.showNotesList();
-        Log.w("Running Stage:","init3");
         mNotesViews.setLayoutManager(mLinearLayoutManager);
-        Log.w("Running Stage:","init4");
-        mNotesViews.addItemDecoration(
-                new DividerItemDecoration(getActivity(), null));
-        Log.w("Running Stage:","init5");
+        mNotesViews.addItemDecoration(new DividerItemDecoration(getActivity(), null));
         mRefreshLayout.setColorSchemeResources(
                 R.color.colorPrimary,
                 R.color.green_cycle,
                 R.color.orange_cycle,
                 R.color.red_cycle);
-        Log.w("Running Stage:","init6");
         setListener();
-        Log.w("Running Stage:","init-over");
     }
 
     private void setListener() {
@@ -189,6 +172,7 @@ public class NotesPageFragment extends Fragment implements NotesContract.View,
     @Override
     public void showNotes(List<Note> noteList) {
         mNotesAdapter = new NotesAdapter(getActivity(), noteList, new MultiSelector());
+        Log.w(TAG,":mNotesAdapter = "+mNotesAdapter);
 //        mSelector = mNotesAdapter.getSelector();
         mNotesViews.setAdapter(mNotesAdapter);
     }
@@ -220,11 +204,6 @@ public class NotesPageFragment extends Fragment implements NotesContract.View,
         mNotesPresenter.refreshNotes();
     }
 
-    @OnClick(R.id.fab)
-    public void onClick() {
-        Intent enterNewActivity = new Intent(getActivity(), AddNoteActivity.class);
-        startActivityForResult(enterNewActivity, ADD_NOTE_EVENT);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

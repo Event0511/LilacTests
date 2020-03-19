@@ -2,30 +2,27 @@ package com.example.lilactests.view.layoutfragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.lilactests.R;
 import com.example.lilactests.SolvingProblemsActivity;
-import com.example.lilactests.notes.MainActivity;
-
-import butterknife.BindView;
+import com.example.lilactests.questions.MistakesActivity;
 
 /**
  *  Created by Eventory on 2017/2/12 0012.
  */
 
-public class MainPageFragment extends Fragment implements View.OnClickListener{
+public class MainPageFragment extends Fragment {
     private static final String ARG_POSITION = "position";
     private static int nowPosition;
     View view = null;
     Button chapterExcBtn = null;
-    @BindView(R.id.simulate_test_button)
-    Button simulateTestBtn;
+    Button simulateTestBtn = null;
+    Button wrongQuestBtn = null;
 
     public MainPageFragment() {
         super();
@@ -53,6 +50,7 @@ public class MainPageFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SolvingProblemsActivity.class);
+                intent.putExtra("problem amount", 5);
                 startActivity(intent);
             }
         });
@@ -60,21 +58,20 @@ public class MainPageFragment extends Fragment implements View.OnClickListener{
         simulateTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), SolvingProblemsActivity.class);
+                intent.putExtra("problem amount", 10);
+                startActivity(intent);
+            }
+        });
+        wrongQuestBtn = (Button) view.findViewById(R.id.wrong_quest_button);
+        wrongQuestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MistakesActivity.class);
                 startActivity(intent);
             }
         });
         return view;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.chapter_exc_button:
-                Toast.makeText(getActivity(), "ChapterExc", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), SolvingProblemsActivity.class);
-                startActivity(intent);
-                break;
-        }
-    }
 }

@@ -2,9 +2,9 @@ package com.example.lilactests.notedetail;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -28,7 +28,7 @@ import butterknife.OnClick;
  */
 public class NoteDetailActivity extends BaseActivity implements NoteDetailContract.View {
 
-    private static final String TAG = "NoteDetailActivity";
+    private static final String TAG = "QuestionDetailActivity";
     private static final int EDIT_NOTE_ITEM = 0;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;

@@ -3,8 +3,8 @@ package com.example.lilactests.notes.adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,14 +30,14 @@ import java.util.List;
  * Adapter For List Notes,support choice mode.
  */
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHolder> {
-    private static final String TAG = "NotesAdapter";
+    private static final String TAG = "QuestionsAdapter";
     private Context mContext;
     private List<Note> mNotesList;
-    private MultiSelector mSelector;
-    private boolean isMultiMode;
+    private MultiSelector mSelector;  //多选
+    private boolean isMultiMode;      //开启多选模式
     private ActionMode.Callback mActionSelectMode = new ActionMode.Callback() {
         @Override
-        public boolean onCreateActionMode(android.view.ActionMode mode, Menu menu) {
+        public boolean onCreateActionMode(android.view.ActionMode mode, Menu menu) {//临时占据了ActionBar的位置
             new MenuInflater(mContext).inflate(R.menu.menu_multi_mode, menu);
             return true;
         }
@@ -68,23 +68,25 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
         }
     };
 
-    private void deleteSelectedNotes() {
+    private void deleteSelectedNotes() { //删除条目功能 并且加入了确认功能
 
         new AlertDialog.Builder(mContext)
                 .setTitle(R.string.title_delete)
                 .setMessage(R.string.content_delete)
-                .setNegativeButton(R.string.btn_cancel, null)
+                .setNegativeButton(R.string.btn_cancel, null) // negative button 本身就有关闭的作用 所以传入参数null 表示没有额外的动作
                 .setPositiveButton(R.string.btn_confirm, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which) {//点击之后 删除选中的条目 remove mNotesList和 mSelector
                         for (Note item : mNotesList) {
                             if (mSelector.contains(item.id)) {
                                 mNotesList.remove(item);
                                 mSelector.remove(item.id);
-                                new NotesPresenter(mContext, null).deleteNote(item.id);
+                                new NotesPresenter(mContext, null).deleteNote(item.id);//再新创建一个 QuestionsPresenter MVP架构中的业务逻辑部分
                             }
                         }
-                        notifyDataSetChanged();
+                        notifyDataSetChanged(); //有时候我们需要修改已经生成的列表，添加或者修改数据，notifyDataSetChanged()
+                        // 可以在修改适配器绑定的数组后，不用重新刷新Activity，通知Activity更新ListView
+                        // 动态更新listView;
                     }
                 }).create().show();
     }
@@ -97,7 +99,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
 
     private void setSelectable(Boolean isSelectable) {
         mSelector.setSelectable(isSelectable);
-        this.notifyDataSetChanged();
+        this.notifyDataSetChanged();//对于listView进行动态的更新
     }
 
     public boolean isSelectable() {

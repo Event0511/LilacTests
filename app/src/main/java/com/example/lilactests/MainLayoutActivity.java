@@ -3,35 +3,42 @@ package com.example.lilactests;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.astuetz.PagerSlidingTabStrip;
 import com.example.lilactests.adapter.MainPagerAdapter;
 import com.example.lilactests.app.LilacTestsApp;
 import com.example.lilactests.utils.ActivityCollector;
 import com.example.lilactests.utils.PrefUtils;
+import com.google.android.material.tabs.TabLayout;
+
+import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainLayoutActivity extends BaseActivity {
 
     private DrawerLayout theDrawerLayout;
-    private PagerSlidingTabStrip thePagerSlidingTabStrip;
+    private TabLayout theTabLayout;
     private ViewPager theViewPager;
     private Toolbar toolbar;
     private ActionBar actionBar;
+    private CircleImageView header;
     private long exitTime = 0;
 
     @Override
@@ -39,16 +46,27 @@ public class MainLayoutActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 
+        ButterKnife.bind(this);
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
         theDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         actionBar = getSupportActionBar();
         final NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navView.getHeaderView(0);
+        header = (CircleImageView) headerView.findViewById(R.id.header_image);
 
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.usercofig_button);
         }
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainLayoutActivity.this, UserInfoActivity.class);
+                startActivity(intent);
+            }
+        });
+
         navView.setCheckedItem(R.id.nav_navigate);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -66,27 +84,12 @@ public class MainLayoutActivity extends BaseActivity {
             }
         });
 
-        thePagerSlidingTabStrip = (PagerSlidingTabStrip) findViewById(R.id.main_tabs);
-        theViewPager = (ViewPager) findViewById(R.id.main_pager);
-        theViewPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
-        thePagerSlidingTabStrip.setViewPager(theViewPager);
-        initTabsValue();
-        thePagerSlidingTabStrip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        theTabLayout = findViewById(R.id.main_tabs);
+        theViewPager = findViewById(R.id.main_pager);
+        theViewPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
+        theTabLayout.setupWithViewPager(theViewPager);
 
-            }
 
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
     /**
@@ -102,7 +105,7 @@ public class MainLayoutActivity extends BaseActivity {
             if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
                 // 判断2次点击事件时间
                 if ((System.currentTimeMillis() - exitTime) > 2000) {
-                    Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.double_click_exit), Toast.LENGTH_SHORT).show();
                     exitTime = System.currentTimeMillis();
                 } else {
                     ActivityCollector.finishAll();
@@ -149,39 +152,6 @@ public class MainLayoutActivity extends BaseActivity {
             window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
         }
     }
-    /**
-     * thePagerSlidingTabStrip默认值配置
-     *
-     */
-    private void initTabsValue() {
-        if (PrefUtils.isNightMode()) {
-            // tab背景
-            thePagerSlidingTabStrip.setBackgroundColor(ContextCompat.getColor(LilacTestsApp.getContext(),
-                    R.color.colorPrimary_Night));
-            // 底部游标颜色
-            thePagerSlidingTabStrip.setIndicatorColor(ContextCompat.getColor(LilacTestsApp.getContext(),
-                    R.color.colorAccent_Night));
-        } else {
-            // tab背景
-            thePagerSlidingTabStrip.setBackgroundColor(ContextCompat.getColor(LilacTestsApp.getContext(),
-                    R.color.colorPrimary));
-            // 底部游标颜色
-            thePagerSlidingTabStrip.setIndicatorColor(ContextCompat.getColor(LilacTestsApp.getContext(),
-                    R.color.colorAccent));
-        }
 
-        // tab的分割线颜色
-        thePagerSlidingTabStrip.setDividerColor(Color.TRANSPARENT);
-        // 正常文字颜色
-        thePagerSlidingTabStrip.setTextColor(Color.WHITE);
-        // tab底线高度
-        thePagerSlidingTabStrip.setUnderlineHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                                                        1, getResources().getDisplayMetrics()));
-        // 游标高度
-        thePagerSlidingTabStrip.setIndicatorHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                                                        5, getResources().getDisplayMetrics()));
-        // 选中的文字颜色
-        //thePagerSlidingTabStrip.setSelectedTextColor(Color.WHITE);Color.parseColor("#4876FF")
-    }
 
 }

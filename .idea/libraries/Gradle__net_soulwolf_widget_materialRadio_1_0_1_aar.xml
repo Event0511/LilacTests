@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Gradle: net.soulwolf.widget:materialRadio:1.0.1@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a08df031c22dceb3a862274bb4cfa10f/jetified-materialRadio-1.0.1/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a08df031c22dceb3a862274bb4cfa10f/jetified-materialRadio-1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a08df031c22dceb3a862274bb4cfa10f/jetified-materialRadio-1.0.1/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.soulwolf.widget/materialRadio/1.0.1/87b7ac39770c2ef5715c0cd122ba106aaac00790/materialRadio-1.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.soulwolf.widget/materialRadio/1.0.1/78d9029f0b880bf2272158b40b5782faade98260/materialRadio-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

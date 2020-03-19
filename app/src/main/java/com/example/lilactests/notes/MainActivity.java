@@ -4,19 +4,17 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.content.ContextCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -37,7 +35,6 @@ import com.example.lilactests.view.dialogfragment.AboutFragment;
 
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscription;
@@ -49,7 +46,7 @@ import rx.functions.Action1;
 public class MainActivity extends BaseActivity implements NotesContract.View,
         SwipeRefreshLayout.OnRefreshListener {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "MistakesActivity";
     public static final int ADD_NOTE_EVENT = 0;
     public static final int EDIT_NOTE_EVENT = 1;
     private static final String ABOUT_FRAGMENT = "ABOUT_FRAGMENT";
@@ -72,7 +69,7 @@ public class MainActivity extends BaseActivity implements NotesContract.View,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_mistakes);
         ButterKnife.bind(this);
         init();
     }
@@ -87,6 +84,7 @@ public class MainActivity extends BaseActivity implements NotesContract.View,
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager
                 (MainActivity.this, LinearLayoutManager.VERTICAL, false);
 
+
         mNotesPresenter = new NotesPresenter(this, this);
         mNotesPresenter.showNotesList();
         mNotesViews.setLayoutManager(mLinearLayoutManager);
@@ -99,7 +97,6 @@ public class MainActivity extends BaseActivity implements NotesContract.View,
                 R.color.red_cycle);
         setListener();
     }
-
 
     private void setListener() {
         mRefreshLayout.setOnRefreshListener(this);

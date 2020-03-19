@@ -2,8 +2,8 @@ package com.example.lilactests.notedetail;
 
 import android.content.Context;
 
-import com.example.lilactests.model.INoteModel;
-import com.example.lilactests.model.NoteModel;
+import com.example.lilactests.model.Note.INoteModel;
+import com.example.lilactests.model.Note.NoteModel;
 import com.example.lilactests.model.domain.Note;
 
 import rx.Observable;

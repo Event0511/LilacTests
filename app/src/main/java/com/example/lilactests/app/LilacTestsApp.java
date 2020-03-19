@@ -18,6 +18,7 @@ public class LilacTestsApp extends Application {
 
     @Override
     public void onCreate() {
+        super.onCreate();
         context = getApplicationContext();
         LitePalApplication.initialize(context);
     }

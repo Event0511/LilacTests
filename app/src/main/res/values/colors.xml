@@ -3,15 +3,20 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorTransparent">#0000</color>
 
     <color name="colorPrimary_Night">#808080</color>
     <color name="colorPrimaryDark_Night">#666666</color>
     <color name="colorAccent_Night">#FF4081</color>
 
     <color name="black_overlay">#66000000</color>
+    <color name="steel_blue1">#63B8FF</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="steel_blue1">#63B8FF</color>
+    <color name="purple">#9B30FF</color>
+    <color name="orange">#FFA500</color>
+    <color name="red">#EE3B3B</color>
+    <color name="colorAccentTransparent">#70FF4081</color>
 
     <!--以下来自wing-->
     <color name="dark_divider">#84848484</color>
@@ -21,4 +26,11 @@
 
     <color name="white_light">#FFFFFFFF</color>
     <color name="black_transparent">#44121212</color>
+
+
+    <color name="icon_enabled">#FFFFFFFF</color>
+    <color name="icon_disabled">#FF63727B</color>
+
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="half_black">#808080</color>
 </resources>

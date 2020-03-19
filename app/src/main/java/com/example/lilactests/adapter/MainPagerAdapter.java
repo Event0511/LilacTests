@@ -1,8 +1,9 @@
 package com.example.lilactests.adapter;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.lilactests.view.layoutfragment.MainPageFragment;
 import com.example.lilactests.view.layoutfragment.NotesPageFragment;
@@ -13,11 +14,10 @@ import com.example.lilactests.view.layoutfragment.StatisticPageFragment;
  */
 
 public class MainPagerAdapter extends FragmentPagerAdapter {
-
     private final String[] TITLES = { "主页", "笔记", "统计"};
 
-    public MainPagerAdapter(FragmentManager fm) {
-        super(fm);
+    public MainPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+        super(fm, behavior);
     }
 
     @Override
@@ -30,6 +30,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
         return TITLES.length;
     }
 
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         Fragment fragment;
@@ -49,4 +50,5 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
         }
         return fragment;
     }
+
 }

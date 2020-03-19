@@ -1,12 +1,17 @@
 package com.example.lilactests.utils;
 
+import android.text.TextUtils;
+import android.widget.Toast;
+
+import com.example.lilactests.app.LilacTestsApp;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by wing on 2016/4/19.
+ *  Created by wing on 2016/4/19.
  */
 public class TimeUtils {
     private static final SimpleDateFormat mSimpleDateTimeFormat
@@ -117,5 +122,24 @@ public class TimeUtils {
                 && tvCalendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH);
     }
 
+    /**
+     * Format DateTime to String
+     *
+     * @param
+     * @return  get now date
+     */
+    public static Date getNowDateTime() {
+        Calendar calendar = Calendar.getInstance();
+        Date mNow = new Date();
+
+        String time = TimeUtils.formatTime(calendar.getTime());
+        String date = TimeUtils.formatDate(new Date(calendar.getTimeInMillis()));
+        String now = String.valueOf(date) + " " +
+                String.valueOf(time);
+        if (!TextUtils.isEmpty(now.trim())) {
+            mNow = TimeUtils.parseText(now);
+        }
+        return mNow;
+    }
 
 }

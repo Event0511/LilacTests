@@ -3,11 +3,12 @@ package com.example.lilactests;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.app.FragmentTransaction;
 import android.preference.PreferenceFragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.ActionBar;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import com.example.lilactests.view.layoutfragment.SettingFragment;
 import com.example.lilactests.utils.ActivityCollector;
 import com.example.lilactests.utils.StatusBarUtils;
 
-public class SettingsActivity extends BaseActivity implements SettingFragment.OnTransition {
+public class SettingsActivity extends BaseActivity {
     private Toolbar mToolbar;
     private ViewGroup mViewGroup = null;
     private ImageView mImageView = null;
@@ -68,7 +69,7 @@ public class SettingsActivity extends BaseActivity implements SettingFragment.On
     }
 
     /**
-     * 获取布局的DrawableCache给ImageView覆盖Fragment
+     * 获取布局的DrawableCache给ImageView，令其显示来覆盖Fragment视图
      */
     private void setDrawableCache() {
         //设置false清除缓存
@@ -84,8 +85,8 @@ public class SettingsActivity extends BaseActivity implements SettingFragment.On
      * 添加Fragment,如果已存在Fragment就先移除在添加
      * @param resource 资源id
      */
-    private void addPreferenceFragment(int resource) {
-        android.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+    private void addPreferenceFragment(final int resource) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         if (mSettingFragment != null){
             fragmentTransaction.remove(mSettingFragment);
         }
@@ -95,14 +96,16 @@ public class SettingsActivity extends BaseActivity implements SettingFragment.On
     }
 
     /**
-     * ImageView的动画
-     * @param view
+     * 开始一段View的渐隐补间动画
+     * @param view 要进行动画的view
      */
     private void startAnimation(final View view) {
+        // 设定一个在ANIMTION_TIME时间内，从0变化到1f的ValueAnimator
         ValueAnimator animator = ValueAnimator.ofFloat(1f).setDuration(ANIMTION_TIME);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
+                // ValueAnimator每次递增变化，都获得其当前值，为视图设置透明度为 1f-当前值
                 float n = (float) animation.getAnimatedValue();
                 view.setAlpha(1f - n);
             }
@@ -110,6 +113,7 @@ public class SettingsActivity extends BaseActivity implements SettingFragment.On
         animator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
+                // 设定动画停止后，隐藏ImageView
                 super.onAnimationEnd(animation);
                 mImageView.setVisibility(View.INVISIBLE);
             }
@@ -117,8 +121,11 @@ public class SettingsActivity extends BaseActivity implements SettingFragment.On
         animator.start();
     }
 
-    @Override
+    /**
+     * 转换主题，利用ImageView做渐隐过渡
+     */
     public void beginTransition() {
+        // 设置当前LinearLayout的Draw缓存，把缓存的Bitmap设定给ImageView显示出来
         setDrawableCache();
         switch (LilacTestsApp.getAppTheme()) {
             case R.style.DefaultAppTheme:
@@ -132,7 +139,9 @@ public class SettingsActivity extends BaseActivity implements SettingFragment.On
         }
         this.setTheme(LilacTestsApp.getAppTheme());
         addPreferenceFragment(R.id.content_frame);
+        // 开始ImageView的渐隐补间动画
         startAnimation(mImageView);
+        // 除了当前活动，重新创建所有活动的视图以更新其主题
         ActivityCollector.removeActivity(this);
         ActivityCollector.recreateAll();
         ActivityCollector.addActivity(this);

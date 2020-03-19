@@ -6,7 +6,7 @@ import rx.subjects.SerializedSubject;
 import rx.subjects.Subject;
 
 /**
- * Created by wing on 2016/5/9.
+ *  Created by wing on 2016/5/9.
  */
 public class RxBus {
     private static volatile RxBus defaultInstance;

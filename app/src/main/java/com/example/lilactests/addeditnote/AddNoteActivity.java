@@ -1,9 +1,11 @@
 package com.example.lilactests.addeditnote;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.MenuItem;
 import android.view.View;
 
@@ -30,8 +32,9 @@ public class AddNoteActivity extends BaseActivity implements AddEditNoteContract
     private static final String TAG = "AddNoteActivity";
     private static final String TRASH_CONFIRM_FRAGMENT = "TrashConfirmFragment";
     public static final int ADD_SUCCESS = 1;
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+
+    private Toolbar mToolbar;
+    private Fragment mFragment;
     @BindView(R.id.fab_save)
     FloatingActionButton mSaveFab;
     private EditNoteFragment mNoteFragment;
@@ -62,10 +65,10 @@ public class AddNoteActivity extends BaseActivity implements AddEditNoteContract
 
 
     private void initView() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
 
     @OnClick({R.id.fab_save})
     public void onClick(View view) {

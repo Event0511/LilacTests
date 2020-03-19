@@ -58,8 +58,7 @@
         android:layout_marginRight="@dimen/text_margin"
         android:background="@color/dark_divider" />
 
-    <android.support.v4.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -70,13 +69,12 @@
             android:id="@+id/et_content"
             style="@android:style/Widget.Holo.EditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="@dimen/text_margin"
             android:background="#00000000"
             android:hint="@string/content_default"
             android:inputType="textMultiLine"
-            android:maxLines="@android:integer/config_longAnimTime"
-            android:singleLine="false" />
+            android:maxLines="@android:integer/config_longAnimTime" />
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>
